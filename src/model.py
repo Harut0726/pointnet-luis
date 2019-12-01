@@ -177,15 +177,15 @@ def get_model(bn_momentum):
     # Global feature vector (B x N x 1024 -> B x 1024)
     global_descriptor = tf.reduce_max(embed_1024, axis=1)
 
-    # FC layers to output k scores (B x 1024 -> B x 40)
-    hidden_512 = CustomDense(512, activation=tf.nn.relu, apply_bn=True,
-                             bn_momentum=bn_momentum)(global_descriptor)
-    hidden_512 = Dropout(rate=0.3)(hidden_512)
+#     # FC layers to output k scores (B x 1024 -> B x 40)
+#     hidden_512 = CustomDense(512, activation=tf.nn.relu, apply_bn=True,
+#                              bn_momentum=bn_momentum)(global_descriptor)
+#     hidden_512 = Dropout(rate=0.3)(hidden_512)
 
-    hidden_256 = CustomDense(256, activation=tf.nn.relu, apply_bn=True,
-                             bn_momentum=bn_momentum)(hidden_512)
-    hidden_256 = Dropout(rate=0.3)(hidden_256)
+#     hidden_256 = CustomDense(256, activation=tf.nn.relu, apply_bn=True,
+#                              bn_momentum=bn_momentum)(hidden_512)
+#     hidden_256 = Dropout(rate=0.3)(hidden_256)
 
-    logits = CustomDense(40, apply_bn=False)(hidden_256)
+#     logits = CustomDense(40, apply_bn=False)(hidden_256)
 
     return Model(inputs=pt_cloud, outputs=logits)
